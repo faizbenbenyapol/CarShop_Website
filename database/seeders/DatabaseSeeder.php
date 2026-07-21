@@ -81,5 +81,8 @@ class DatabaseSeeder extends Seeder
         foreach ($customers as $customer) {
             Customer::create($customer);
         }
+
+        // Demo cars (ใช้รูปตัวอย่างที่มีอยู่ใน public/uploads)
+        $this->call(CarDemoSeeder::class);
     }
 }
