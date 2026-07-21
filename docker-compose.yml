@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    container_name: carshop-app
+    ports:
+      - "127.0.0.1:8081:80"
+    volumes:
+      - ./.env:/var/www/html/.env
+      - ./storage:/var/www/html/storage
+      - ./database:/var/www/html/database
+      - ./public/uploads:/var/www/html/public/uploads
+    restart: unless-stopped
