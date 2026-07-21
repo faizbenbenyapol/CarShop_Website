@@ -7,7 +7,6 @@ use App\Models\TestModel;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Customer;
-use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -28,13 +27,6 @@ class DashboardController extends Controller
         
         // รถที่ขายดีที่สุด (ตัวอย่าง)
         $popularCars = TestModel::orderBy('id', 'desc')->limit(5)->get();
-
-        // ยอดขายรายเดือน (ตัวอย่าง)
-        $monthlySales = DB::table('cars')
-            ->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-            ->whereYear('created_at', date('Y'))
-            ->groupBy('month')
-            ->get();
 
         return view('admin.dashboard', compact(
             'totalCars', 'availableCars', 'soldCars', 'reservedCars', 'totalCustomers',

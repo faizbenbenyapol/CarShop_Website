@@ -16,6 +16,12 @@
                         <p class="text-muted">ยินดีต้อนรับผู้ดูแลระบบ</p>
                     </div>
 
+                    <div class="alert alert-info small mb-4">
+                        <i class="fas fa-info-circle me-1"></i><strong>บัญชีทดลองใช้งาน (Demo)</strong><br>
+                        อีเมล: <code>admin@carshop.com</code><br>
+                        รหัสผ่าน: <code>password</code>
+                    </div>
+
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul class="mb-0">

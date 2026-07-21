@@ -19,12 +19,14 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@carshop.com',
+            'role' => 'admin',
         ]);
 
         // Create regular user for testing
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'user@carshop.com',
+            'role' => 'user',
         ]);
 
         // Categories
