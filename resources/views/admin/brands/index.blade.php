@@ -25,7 +25,6 @@
                     <thead class="table-dark">
                         <tr>
                             <th><i class="fas fa-hashtag me-1"></i>ID</th>
-                            <th><i class="fas fa-image me-1"></i>โลโก้</th>
                             <th><i class="fas fa-copyright me-1"></i>ชื่อยี่ห้อ</th>
                             <th><i class="fas fa-globe me-1"></i>ประเทศ</th>
                             <th><i class="fas fa-align-left me-1"></i>คำอธิบาย</th>
@@ -38,17 +37,6 @@
                         @foreach($brands as $brand)
                         <tr>
                             <td class="fw-bold text-primary">{{ $brand->id }}</td>
-                            <td>
-                                @if($brand->logo)
-                                    <img src="{{ Storage::url($brand->logo) }}" alt="{{ $brand->name }}"
-                                         style="width: 60px; height: 60px; object-fit: contain;" class="rounded shadow-sm">
-                                @else
-                                    <div class="bg-gradient-secondary d-flex align-items-center justify-content-center text-white rounded shadow-sm"
-                                         style="width: 60px; height: 60px;">
-                                        <i class="fas fa-industry fa-lg"></i>
-                                    </div>
-                                @endif
-                            </td>
                             <td class="fw-semibold">{{ $brand->name }}</td>
                             <td>
                                 <span class="badge bg-info">

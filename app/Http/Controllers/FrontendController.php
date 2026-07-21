@@ -88,7 +88,9 @@ class FrontendController extends Controller
     public function category($id)
     {
         $category = Category::findOrFail($id);
-        $cars = TestModel::where('category_id', $id)
+        $cars = TestModel::with(['category', 'brand'])
+            ->where('category_id', $id)
+            ->where('status', 'available')
             ->orderBy('id', 'desc')
             ->paginate(12);
 
@@ -98,7 +100,9 @@ class FrontendController extends Controller
     public function brand($id)
     {
         $brand = Brand::findOrFail($id);
-        $cars = TestModel::where('brand_id', $id)
+        $cars = TestModel::with(['category', 'brand'])
+            ->where('brand_id', $id)
+            ->where('status', 'available')
             ->orderBy('id', 'desc')
             ->paginate(12);
 

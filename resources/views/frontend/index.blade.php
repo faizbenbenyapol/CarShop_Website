@@ -134,24 +134,52 @@
         <div class="row">
             @foreach($brands as $brand)
             <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card text-center card-hover">
-                    @if($brand->logo)
-                        <img src="{{ Storage::url($brand->logo) }}" class="card-img-top" 
-                             alt="{{ $brand->name }}" style="height: 150px; object-fit: contain; padding: 20px;">
-                    @else
-                        <div class="bg-secondary text-white d-flex align-items-center justify-content-center" 
-                             style="height: 150px;">
-                            <i class="fas fa-industry fa-2x"></i>
+                <div class="card text-center card-hover h-100 border-0 shadow-sm">
+                    <div class="card-img-top d-flex align-items-center justify-content-center position-relative overflow-hidden"
+                         style="height: 150px; background: linear-gradient(135deg, 
+                         @if($brand->name == 'Toyota')
+                             #e74c3c, #c0392b
+                         @elseif($brand->name == 'Honda') 
+                             #3498db, #2980b9
+                         @elseif($brand->name == 'Mercedes-Benz')
+                             #34495e, #2c3e50
+                         @elseif($brand->name == 'BMW')
+                             #9b59b6, #8e44ad
+                         @elseif($brand->name == 'Audi')
+                             #f39c12, #e67e22
+                         @else
+                             #667eea, #764ba2
+                         @endif
+                         );">
+                        <div class="text-center text-white">
+                            <i class="fas fa-car fa-3x mb-2"></i>
+                            <h4 class="fw-bold">{{ $brand->name }}</h4>
                         </div>
-                    @endif
+                        <div class="position-absolute top-0 end-0 m-2">
+                            @if($brand->country)
+                                <span class="badge bg-light text-dark">
+                                    <i class="fas fa-flag me-1"></i>{{ $brand->country }}
+                                </span>
+                            @endif
+                        </div>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ $brand->name }}</h5>
-                        @if($brand->country)
-                            <p class="text-muted">{{ $brand->country }}</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge bg-success fs-6">
+                                <i class="fas fa-car me-1"></i>{{ $brand->cars_count }} คัน
+                            </span>
+                            <small class="text-muted">
+                                <i class="fas fa-star text-warning me-1"></i>ยี่ห้อยอดนิยม
+                            </small>
+                        </div>
+                        
+                        @if($brand->description)
+                            <p class="text-muted small mb-3">{{ Str::limit($brand->description, 80) }}</p>
                         @endif
-                        <p class="text-muted">{{ $brand->cars_count }} คัน</p>
-                        <a href="{{ route('brand.cars', $brand->id) }}" class="btn btn-outline-primary">
-                            ดูรถยี่ห้อนี้
+                        
+                        <a href="{{ route('brand.cars', $brand->id) }}" 
+                           class="btn btn-outline-primary btn-sm w-100">
+                            <i class="fas fa-search me-1"></i>ดูรถยี่ห้อนี้
                         </a>
                     </div>
                 </div>
@@ -197,3 +225,32 @@
     </div>
 </section>
 @endsection
+
+<style>
+.card-hover {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+}
+
+.card-hover:hover .card-img-top {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.card-hover:hover .card-img-top i {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.brand-card-gradient {
+    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 100%);
+}
+
+.badge {
+    font-size: 0.75em !important;
+}
+</style>

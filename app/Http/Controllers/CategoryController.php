@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::orderBy('id', 'desc')->paginate(10);
+        $categories = Category::withCount('cars')->orderBy('id', 'asc')->paginate(10);
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -48,18 +48,10 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255|unique:categories,name,' . $category->id,
-            'description' => 'nullable',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'description' => 'nullable'
         ]);
 
         $data = $request->only(['name', 'description']);
-
-        if ($request->hasFile('image')) {
-            if ($category->image) {
-                Storage::disk('public')->delete($category->image);
-            }
-            $data['image'] = $request->file('image')->store('categories', 'public');
-        }
 
         $category->update($data);
         Alert::success('สำเร็จ', 'แก้ไขหมวดหมู่สำเร็จ');

@@ -25,7 +25,6 @@
                     <thead class="table-dark">
                         <tr>
                             <th><i class="fas fa-hashtag me-1"></i>ID</th>
-                            <th><i class="fas fa-image me-1"></i>รูปภาพ</th>
                             <th><i class="fas fa-tag me-1"></i>ชื่อหมวดหมู่</th>
                             <th><i class="fas fa-align-left me-1"></i>คำอธิบาย</th>
                             <th><i class="fas fa-car me-1"></i>จำนวนรถ</th>
@@ -37,17 +36,6 @@
                         @foreach($categories as $category)
                         <tr>
                             <td class="fw-bold text-primary">{{ $category->id }}</td>
-                            <td>
-                                @if($category->image)
-                                    <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}"
-                                         style="width: 60px; height: 60px; object-fit: cover;" class="rounded shadow-sm">
-                                @else
-                                    <div class="bg-gradient-secondary d-flex align-items-center justify-content-center text-white rounded shadow-sm"
-                                         style="width: 60px; height: 60px;">
-                                        <i class="fas fa-image fa-lg"></i>
-                                    </div>
-                                @endif
-                            </td>
                             <td class="fw-semibold">{{ $category->name }}</td>
                             <td class="text-muted">{{ Str::limit($category->description, 50) }}</td>
                             <td>

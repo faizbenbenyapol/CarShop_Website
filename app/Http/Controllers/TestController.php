@@ -15,7 +15,7 @@ class TestController extends Controller
     {
         try {
             Paginator::useBootstrap();
-            $carList = TestModel::orderBy('id', 'desc')->paginate(5);
+            $carList = TestModel::orderBy('id', 'asc')->paginate(5);
             return view('test.list', compact('carList'));
         } catch (\Exception $e) {
             return view('errors.404');
@@ -102,6 +102,13 @@ class TestController extends Controller
                 'product_detail' => $car->product_detail,
                 'price'          => $car->price,
                 'picture'        => $car->picture,
+                'category_id'    => $car->category_id,
+                'brand_id'       => $car->brand_id,
+                'model_year'     => $car->model_year,
+                'fuel_type'      => $car->fuel_type,
+                'transmission'   => $car->transmission,
+                'mileage'        => $car->mileage,
+                'status'         => $car->status,
             ]);
         } catch (\Exception $e) {
             return view('errors.404');
@@ -134,7 +141,7 @@ class TestController extends Controller
         ], $messages);
 
         if ($validator->fails()) {
-            return redirect('test/' . $id)
+            return redirect()->route('admin.cars.edit', $id)
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -153,10 +160,17 @@ class TestController extends Controller
                 'product_detail' => strip_tags($request->input('product_detail')),
                 'price'          => strip_tags($request->input('price')),
                 'picture'        => $filename,
+                'category_id'    => $request->input('category_id'),
+                'brand_id'       => $request->input('brand_id'),
+                'model_year'     => $request->input('model_year'),
+                'fuel_type'      => $request->input('fuel_type'),
+                'transmission'   => $request->input('transmission'),
+                'mileage'        => $request->input('mileage'),
+                'status'         => $request->input('status'),
             ]);
 
-            Alert::success('ปรับปรุงสินค้าสำเร็จ');
-            return redirect('/test');
+            Alert::success('ปรับปรุงรถยนต์สำเร็จ');
+            return redirect()->route('admin.cars.index');
         } catch (\Exception $e) {
             return view('errors.404');
         }
@@ -167,8 +181,8 @@ class TestController extends Controller
         try {
             $car = TestModel::find($id);
             $car->delete();
-            Alert::success('ลบสินค้าสำเร็จ');
-            return redirect('/test');
+            Alert::success('ลบรถยนต์สำเร็จ');
+            return redirect()->route('admin.cars.index');
         } catch (\Exception $e) {
             return view('errors.404');
         }

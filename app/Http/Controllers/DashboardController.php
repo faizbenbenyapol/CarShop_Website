@@ -17,6 +17,7 @@ class DashboardController extends Controller
         $totalCars = TestModel::count();
         $availableCars = TestModel::where('status', 'available')->count();
         $soldCars = TestModel::where('status', 'sold')->count();
+        $reservedCars = TestModel::where('status', 'reserved')->count();
         $totalCustomers = Customer::count();
         $totalCategories = Category::count();
         $totalBrands = Brand::count();
@@ -36,7 +37,7 @@ class DashboardController extends Controller
             ->get();
 
         return view('admin.dashboard', compact(
-            'totalCars', 'availableCars', 'soldCars', 'totalCustomers',
+            'totalCars', 'availableCars', 'soldCars', 'reservedCars', 'totalCustomers',
             'totalCategories', 'totalBrands', 'popularCars'
         ))->with([
             'categories' => $carsByCategory,

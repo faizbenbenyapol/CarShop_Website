@@ -36,10 +36,11 @@ Route::middleware(['web'])->group(function () {
     Route::get('/user/favorites', [UserController::class, 'favorites'])->name('user.favorites');
 });
 
-// Admin Routes (ต้อง login)
-Route::middleware(['web'])->group(function () {
+// Admin Routes (ต้อง login และเป็น admin)
+Route::middleware(['web', 'admin'])->group(function () {
     // Dashboard
     Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     // Cars (Test) Management
     Route::get('/admin/cars', [TestController::class, 'index'])->name('admin.cars.index');
@@ -83,6 +84,41 @@ Route::middleware(['web'])->group(function () {
     Route::get('/admin/contact', function() {
         return view('admin.contact.developer');
     })->name('contact.developer');
+});
+
+// Route ชั่วคราว - แสดงข้อมูล users
+Route::get('/show-users', function () {
+    $users = \App\Models\User::all();
+    $html = '<style>table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px;text-align:left}th{background-color:#f2f2f2}</style>';
+    $html .= '<h2>🔐 ข้อมูล Users ในระบบ Car Shop</h2>';
+    $html .= '<table><tr><th>ID</th><th>ชื่อ</th><th>Email</th><th>Role</th><th>สถานะ</th></tr>';
+    
+    foreach($users as $user) {
+        $roleColor = $user->role == 'admin' ? 'color:red;font-weight:bold' : 'color:blue';
+        $status = $user->role == 'admin' ? '✅ เข้า Admin ได้' : '❌ เข้า Admin ไม่ได้';
+        $html .= "<tr><td>{$user->id}</td><td>{$user->name}</td><td>{$user->email}</td><td style='{$roleColor}'>{$user->role}</td><td>{$status}</td></tr>";
+    }
+    
+    $html .= '</table><br>';
+    $html .= '<h3>🧪 ข้อมูลสำหรับทดสอบ:</h3>';
+    $html .= '<div style="background:#f0f8ff;padding:15px;border-radius:8px">';
+    $html .= '<h4 style="color:red">👑 Admin Users (เข้า Admin Panel ได้):</h4>';
+    $html .= '<p>📧 <strong>admin@carshop.com</strong> / 🔑 <strong>123456</strong></p>';
+    $html .= '<p>📧 <strong>user@carshop.com</strong> / 🔑 <strong>123456</strong></p>';
+    $html .= '</div><br>';
+    
+    $html .= '<div style="background:#fff0f5;padding:15px;border-radius:8px">';
+    $html .= '<h4 style="color:blue">👤 Regular User (เข้า Admin Panel ไม่ได้):</h4>';
+    $html .= '<p>📧 <strong>customer@carshop.com</strong> / 🔑 <strong>123456</strong></p>';
+    $html .= '</div><br>';
+    
+    $html .= '<div style="background:#f0fff0;padding:15px;border-radius:8px">';
+    $html .= '<h4>🔗 ลิงก์สำหรับทดสอบ:</h4>';
+    $html .= '<p><a href="/login" style="color:red;font-weight:bold">🔐 Admin Login</a> - เฉพาะ Admin เท่านั้น</p>';
+    $html .= '<p><a href="/user-login" style="color:blue;font-weight:bold">👤 User Login</a> - ทุกคนล็อกอินได้</p>';
+    $html .= '</div>';
+    
+    return $html;
 });
 
 // Legacy routes (for backward compatibility)

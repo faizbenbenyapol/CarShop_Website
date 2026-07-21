@@ -56,6 +56,26 @@
                         </div>
                     </div>
 
+                    <div class="row mt-4">
+                        <!-- Developer 3 -->
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <div class="mb-3">
+                                    <div class="bg-warning rounded-circle d-inline-flex align-items-center justify-content-center" 
+                                         style="width: 80px; height: 80px;">
+                                        <i class="fas fa-user fa-2x text-white"></i>
+                                    </div>
+                                </div>
+                                <h5 class="mb-2">นายวาริศศ์ มินเจริญ</h5>
+                                <div class="mb-3">
+                                    <p class="text-muted mb-1">รหัสนักศึกษา: <strong>2313110872</strong></p>
+                                    <p class="text-muted mb-1">สาขา: <strong>IT</strong></p>
+                                    <p class="text-muted mb-0">MI.Varizz_st@tni.ac.th</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <hr class="my-5">
 
                     <div class="row text-center">

@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <h6 class="text-muted mb-1">รถว่าง</h6>
+                            <h6 class="text-muted mb-1">พร้อมขาย</h6>
                             <h3 class="mb-0 text-success">{{ number_format($availableCars) }}</h3>
                         </div>
                         <div class="ms-3">
@@ -76,12 +76,69 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
+                            <h6 class="text-muted mb-1">รถที่จองแล้ว</h6>
+                            <h3 class="mb-0 text-danger">{{ number_format($reservedCars) }}</h3>
+                        </div>
+                        <div class="ms-3">
+                            <div class="bg-danger bg-opacity-10 rounded p-3">
+                                <i class="fas fa-clock text-danger fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Row -->
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
                             <h6 class="text-muted mb-1">ลูกค้า</h6>
                             <h3 class="mb-0 text-info">{{ number_format($totalCustomers) }}</h3>
                         </div>
                         <div class="ms-3">
                             <div class="bg-info bg-opacity-10 rounded p-3">
                                 <i class="fas fa-users text-info fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="text-muted mb-1">หมวดหมู่</h6>
+                            <h3 class="mb-0 text-secondary">{{ number_format($totalCategories) }}</h3>
+                        </div>
+                        <div class="ms-3">
+                            <div class="bg-secondary bg-opacity-10 rounded p-3">
+                                <i class="fas fa-tags text-secondary fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="text-muted mb-1">ยี่ห้อ</h6>
+                            <h3 class="mb-0 text-dark">{{ number_format($totalBrands) }}</h3>
+                        </div>
+                        <div class="ms-3">
+                            <div class="bg-dark bg-opacity-10 rounded p-3">
+                                <i class="fas fa-industry text-dark fa-lg"></i>
                             </div>
                         </div>
                     </div>
